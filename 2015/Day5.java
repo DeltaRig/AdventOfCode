@@ -1,3 +1,9 @@
+/**
+ * https://adventofcode.com/2015/day/5
+ * @author (Daniela Pereira Rigoli)
+ * 
+ * @version (01/08/2020)
+ */
 import java.io.*;
 
 public class Day5 {
@@ -7,20 +13,19 @@ public class Day5 {
         boolean check;
         
 
-        String path = "C:/Users/hitom/Documents/ProjetosGITs/AdventOfCode/2015/input4.txt"; //write the path for the txt with input
+        String path = "/input5.txt"; //write the path for the txt with input
         try {
             BufferedReader reader = new BufferedReader(new FileReader(path));
             for (String line = reader.readLine(); line != null; line = reader.readLine()){    
                 check = true; //for each line
                 twice = 0;
-                vowels = 0;
                 for(int i = 0; i < line.length() - 1; i++){ // check does not contain the strings ab, cd, pq, or xy
                     compare = line.substring(i,i+2);
                     if(compare.equals("ab") || compare.equals("cd") || compare.equals("pq") || compare.equals("xy")){
                         check = false;
                     }
 
-                    if(line.charAt(i) == line.charAt(i+1)){ // check if the string contains at least one letter that appears twice in a row
+                    if(line.charAt(i) == line.charAt(i+2)){ // check if the string contains at least one letter that appears twice in a row
                         twice++;
                     }
                 }
