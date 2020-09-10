@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\hitom\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\hitom\\.nuget\\packages"
+    ]
+  }
+}
