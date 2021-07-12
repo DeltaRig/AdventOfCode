@@ -1,11 +1,12 @@
-﻿using System;
+﻿/**  .NET Core 3.1 SDK (v3.1.410)   */
+using System;
 using System.Collections.Generic;
 
 namespace Day9 {
     class Program {
         static void Main(string[] args) {
             Console.WriteLine("Hello World!");
-            string[] lines = System.IO.File.ReadAllLines(@"C:\Users\hitom\Documents\ProjetosGITs\AdventOfCode\2015\Day8\entrada.txt");
+            string[] lines = System.IO.File.ReadAllLines(@".\entrada.txt");
 
             String[] cidades = new string[7]; //valor olhado, poderia ser programado
             int[] menores = new int[7];

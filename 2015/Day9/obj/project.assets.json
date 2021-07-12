@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\hitom\\Documents\\ProjetosGITs\\AdventOfCode\\2015\\Day8\\Day8.csproj",
-      "projectName": "Day8",
-      "projectPath": "C:\\Users\\hitom\\Documents\\ProjetosGITs\\AdventOfCode\\2015\\Day8\\Day8.csproj",
+      "projectUniqueName": "C:\\Users\\hitom\\Documents\\ProjetosGit\\AdventOfCode\\2015\\Day9\\Day9.csproj",
+      "projectName": "Day9",
+      "projectPath": "C:\\Users\\hitom\\Documents\\ProjetosGit\\AdventOfCode\\2015\\Day9\\Day9.csproj",
       "packagesPath": "C:\\Users\\hitom\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\hitom\\Documents\\ProjetosGITs\\AdventOfCode\\2015\\Day8\\obj\\",
+      "outputPath": "C:\\Users\\hitom\\Documents\\ProjetosGit\\AdventOfCode\\2015\\Day9\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\hitom\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -56,7 +56,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.410\\RuntimeIdentifierGraph.json"
       }
     }
   }

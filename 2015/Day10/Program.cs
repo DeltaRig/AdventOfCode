@@ -1,4 +1,5 @@
-﻿using System;
+﻿/**  .NET Core 3.1 SDK (v3.1.410)   */
+using System;
 
 namespace Day10
 {
