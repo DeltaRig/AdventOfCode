@@ -43,9 +43,9 @@ def is_possible_game(cube_counts, revealed_sets):
             count = int(cube[0])  # First element in the list is the count
             counts[color] += count
             # Check if the counts match the target cube counts
-        possible = counts['red'] < cube_counts[0] and counts['green'] < cube_counts[1] and counts['blue'] < cube_counts[2]
+        possible = counts['red'] <= cube_counts[0] and counts['green'] <= cube_counts[1] and counts['blue'] <= cube_counts[2]
 
-        if(not possible):
+        if(possible != True):
             return False
         
         counts = {
@@ -96,3 +96,6 @@ result = possible_games_sum(target_cube_counts, input)
 
 # Print the result
 print("The sum of IDs of possible games is:", result)
+
+# 2617
+

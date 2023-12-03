@@ -35,24 +35,26 @@ def extract_calibration_value(line):
     if digits:
         # Extract the first and last digits from the list of digits
         first_digit = digits[0]
-        last_digit = digits[-1]
-        print(last_digit)
+    for i in range(1, len(line)+1):
+        digitsEnd = re.findall(r'(?:one|two|three|four|five|six|seven|eight|nine|\d)', line[len(line)-i:])
+        if digitsEnd:
+            break
+    if digitsEnd:
+        last_digit = digitsEnd[-1]
 
-        # If the first digit is spelled out, map it to the corresponding numeric value
-        if first_digit in digit_mapping:
-            first_digit = digit_mapping[first_digit]
+    # If the first digit is spelled out, map it to the corresponding numeric value
+    if first_digit in digit_mapping:
+        first_digit = digit_mapping[first_digit]
 
-        # If the last digit is spelled out, map it to the corresponding numeric value
-        if last_digit in digit_mapping:
-            last_digit = digit_mapping[last_digit]
+    # If the last digit is spelled out, map it to the corresponding numeric value
+    if last_digit in digit_mapping:
+        last_digit = digit_mapping[last_digit]
 
-        # Calculate the calibration value
-        calibration_value = int(first_digit + last_digit)
-        print(calibration_value)
-        return calibration_value
+    # Calculate the calibration value
+    calibration_value = int(first_digit + last_digit)
+    # print(calibration_value)
+    return calibration_value
 
-    # Return 0 or handle it differently based on your needs
-    return 0
 
 def sum_of_calibration_values(calibration_document):
     # Split the document into lines and calculate the calibration values
@@ -65,21 +67,17 @@ def sum_of_calibration_values(calibration_document):
 
 # # Example calibration document for Part Two
 calibration_document = [
-    "two1nine",
-    "eightwothree",
-    "abcone2threexyz",
-    "xtwone3four",
-    "4nineeightseven2",
-    "zoneight234",
-    "7pqrstsixteen", # 281
-    "rjsevenonefllcrdnbmqcmxqsq38", #78
-    "twoseven2dppxgmlhr61onenine4", #24
-    "sevenb3btzhscqbrxxjkhtzpv", # 73
-    "859two", # 82
-    "one1",
-    "391"
+    "onedpfskdd38qfvbjdnpglone",
+    "247tsnmkd",
+    "two",
+    "ninene",
+    "7nine",
+    "sevennine",
+    "sevenine",
+    "zoneight47five5sixjxd74",
+    "mbkfgktwolbvsptgsixseven1oneightzvm"
 ]
-# calibration_document = open("challenge1b.txt", "r")
+calibration_document = open("challenge1b.txt", "r")
 
 # Calculate the sum of calibration values for Part Two
 result = sum_of_calibration_values(calibration_document)
