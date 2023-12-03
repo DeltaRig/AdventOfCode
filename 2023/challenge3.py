@@ -40,28 +40,31 @@ input = [
 ]
 input = list(open("challenge3.txt", "r"))
 
+def is_symbol(a):
+    return a != '.' and not a.isdigit()
+
 def adjacent_symbol(coordL, coordC, num):
     coordCStart = coordC
     leng = len(str(num))
     coordCEnd = coordC + leng-1
     if(coordC > 0):
         coordCStart = coordC-1
-        if(input[coordL][coordCStart] != '.'):
+        if(is_symbol(input[coordL][coordCStart])):
             return True
     
     if(coordC+ leng < len(input[0])): # checking if didn't pass the line len
         coordCEnd = coordC + leng
-        if(input[coordL][coordCEnd] != '.'):
+        if(is_symbol(input[coordL][coordCEnd])):
             return True
         
     if(coordL > 0):
         for c in range(coordCStart, coordCEnd+1):
-            if(input[coordL-1][c] != '.'):
+            if(is_symbol(input[coordL-1][c])):
                 return True
             
     if(coordL < len(input)-1):
         for c in range(coordCStart, coordCEnd+1):
-            if(input[coordL+1][c] != '.'):
+            if(is_symbol(input[coordL+1][c])):
                 return True
     return False
 
@@ -91,5 +94,6 @@ print(len(input[0]))
 
 print(engine_schematic())
 
+#  527494
 #  527494
 # That's not the right answer; your answer is too high. If you're stuck, make sure you're using the full input data; there are also some general tips on the about page, or you can ask for hints on the subreddit. Please wait one minute before trying again.
