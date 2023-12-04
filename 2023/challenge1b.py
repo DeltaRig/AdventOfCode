@@ -1,3 +1,9 @@
+# /**
+#  * https://adventofcode.com/2023/day/1
+#  * 
+#  * @author (Daniela Pereira Rigoli)
+#  * @version (02/12/2023)
+#  */
 # --- Part Two ---
 # Your calculation isn't quite right. It looks like some of the digits are actually spelled out with letters: one, two, three, four, five, six, seven, eight, and nine also count as valid "digits".
 
@@ -31,7 +37,7 @@ digit_mapping = {
 def extract_calibration_value(line):
     # Use regex to find all spelled-out digits or numeric digits in the line
     digits = re.findall(r'(?:one|two|three|four|five|six|seven|eight|nine|\d)', line)
-    
+
     if digits:
         # Extract the first and last digits from the list of digits
         first_digit = digits[0]

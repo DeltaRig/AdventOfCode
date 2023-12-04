@@ -1,3 +1,9 @@
+# /**
+#  * https://adventofcode.com/2023/day/2
+#  * 
+#  * @author (Daniela Pereira Rigoli)
+#  * @version (02/12/2023)
+#  */
 # --- Part Two ---
 # The Elf says they've stopped producing snow because they aren't getting any water! He isn't sure why the water stopped; however, he can show you how to get to the water source to check it out for yourself. It's just up ahead!
 
