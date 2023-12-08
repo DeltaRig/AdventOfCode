@@ -93,7 +93,12 @@ def engine_schematic():
                         result += int(num)
                     coordC = -1
                     num = ""
-        coordC = -1
+        if(coordC != -1):
+            adj = adjacent_symbol(coordL, coordC, num)
+            if(adj):
+                result += int(num)
+            coordC = -1
+            num = ""
     return result
 print(len(input))
 print(len(input[0]))
@@ -102,4 +107,5 @@ print(engine_schematic())
 
 #  527494
 #  527494
+#  527364
 # That's not the right answer; your answer is too high. If you're stuck, make sure you're using the full input data; there are also some general tips on the about page, or you can ask for hints on the subreddit. Please wait one minute before trying again.
