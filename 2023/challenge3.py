@@ -46,10 +46,20 @@ input = [
 ]
 input = list(open("challenge3.txt", "r"))
 
-def is_symbol(a):
-    return a != '.' and not a.isdigit()
+def is_symbol(c):
+    return (c != '.') and (not c.isdigit())
 
-def adjacent_symbol(coordL, coordC, num):
+
+def is_oob(x, y, grid): #oob = out of bounds
+    max_x = len(grid[0]) - 1
+    max_y = len(grid) - 1
+
+    return (x < 0) or (x > max_x) or (y < 0) or (y > max_y)
+
+
+def has_adjacent_symbol(num_coords, num):
+    coordL = num_coords[1]
+    coordC = num_coords[0]
     coordCStart = coordC
     leng = len(str(num))
     coordCEnd = coordC + leng-1
@@ -74,36 +84,43 @@ def adjacent_symbol(coordL, coordC, num):
                 return True
     return False
 
-def engine_schematic():
-    result = 0
-    coordC = -1
-    coordL = -1
-    num = ""
-    for line in range(0, len(input)):
-        for colunm in range(0, len(input[0])):
-            if(input[line][colunm].isdigit()):
-                num += input[line][colunm]
-                if(coordC == -1):
-                    coordL = line
-                    coordC = colunm
-            else:
-                if(coordC != -1):
-                    adj = adjacent_symbol(coordL, coordC, num)
-                    if(adj):
-                        result += int(num)
-                    coordC = -1
-                    num = ""
-        if(coordC != -1):
-            adj = adjacent_symbol(coordL, coordC, num)
-            if(adj):
-                result += int(num)
-            coordC = -1
-            num = ""
-    return result
-print(len(input))
-print(len(input[0]))
+def engine_schematic(lines):
 
-print(engine_schematic())
+    # Accumulator
+    result = 0
+
+    # Number anchor coords
+    num_coords = None
+
+    # Current parsed number
+    num = ""
+
+    # For each coordinate, if it's a digit, then parse the "num" variable
+    # by continuing to sweep. On the FIRST digit of the number, set coordL
+    # and coordC to the coordinate, as your anchor point, otherwise don't touch them.
+    # If the coordinate is NOT a digit, then reset the anchor coordC, reset the parsed num,
+    # and check if the parsed number (given the known starting coords and number size)
+    # has an adjacent symbol. If so, add it to the accumulator.
+    # At the end of each line, reset the anchor anyway.
+    for y in range(len(lines)):
+        for x in range(len(lines[0])):
+            if lines[y][x].isdigit():
+                if num == "":
+                    num_coords = (x, y)
+                num += lines[y][x]
+            elif num != "":
+                b = has_adjacent_symbol(num_coords, num)
+                if b:
+                    result += int(num)
+                num = ""
+        if num != "":
+            b = has_adjacent_symbol(num_coords, num)
+            if b:
+                result += int(num)
+        num = ""
+    return result
+
+print(engine_schematic(input))
 
 #  527494
 #  527494
