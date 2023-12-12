@@ -32,7 +32,7 @@
 
 # Of course, the actual engine schematic is much larger. What is the sum of all of the part numbers in the engine schematic?
 
-input = [
+engineSchematics = [
     "467A.114..",
     "...*......",
     "..35..633.",
@@ -44,7 +44,14 @@ input = [
     "...$.*....",
     ".664.598..",
 ]
-input = list(open("challenge3.txt", "r"))
+
+file = open('challenge3.txt', 'r')
+engineSchematics = [] # we will store the whole engine schematics here
+partNumbers = [] # here we will store all the part numbers
+
+for line in file: # line by line we store the engine schematics
+    line = line.strip()
+    engineSchematics.append(line)
 
 def is_symbol(c):
     return (c != '.') and (not c.isdigit())
@@ -57,7 +64,7 @@ def is_oob(x, y, grid): #oob = out of bounds
     return (x < 0) or (x > max_x) or (y < 0) or (y > max_y)
 
 
-def has_adjacent_symbol(num_coords, num):
+def has_adjacent_symbol(num_coords, num, lines):
     coordL = num_coords[1]
     coordC = num_coords[0]
     coordCStart = coordC
@@ -65,27 +72,26 @@ def has_adjacent_symbol(num_coords, num):
     coordCEnd = coordC + leng-1
     if(coordC > 0):
         coordCStart = coordC-1
-        if(is_symbol(input[coordL][coordCStart])):
+        if(is_symbol(lines[coordL][coordCStart])):
             return True
     
-    if(coordC+ leng < len(input[0])): # checking if didn't pass the line len
+    if(coordC+ leng < len(lines[0])): # checking if didn't pass the line len
         coordCEnd = coordC + leng
-        if(is_symbol(input[coordL][coordCEnd])):
+        if(is_symbol(lines[coordL][coordCEnd])):
             return True
         
     if(coordL > 0):
         for c in range(coordCStart, coordCEnd+1):
-            if(is_symbol(input[coordL-1][c])):
+            if(is_symbol(lines[coordL-1][c])):
                 return True
             
-    if(coordL < len(input)-1):
+    if(coordL < len(lines)-1):
         for c in range(coordCStart, coordCEnd+1):
-            if(is_symbol(input[coordL+1][c])):
+            if(is_symbol(lines[coordL+1][c])):
                 return True
     return False
 
 def engine_schematic(lines):
-
     # Accumulator
     result = 0
 
@@ -109,18 +115,18 @@ def engine_schematic(lines):
                     num_coords = (x, y)
                 num += lines[y][x]
             elif num != "":
-                b = has_adjacent_symbol(num_coords, num)
+                b = has_adjacent_symbol(num_coords, num, lines)
                 if b:
                     result += int(num)
                 num = ""
         if num != "":
-            b = has_adjacent_symbol(num_coords, num)
+            b = has_adjacent_symbol(num_coords, num, lines)
             if b:
                 result += int(num)
         num = ""
     return result
 
-print(engine_schematic(input))
+print(engine_schematic(engineSchematics))
 
 #  527494
 #  527494
