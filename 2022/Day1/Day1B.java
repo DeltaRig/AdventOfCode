@@ -14,6 +14,8 @@ import java.util.Collections;
 
 
 public class Day1B {
+    // O(n log n) because use sort
+    // Memory O(n)
     public static void main(String args[]){
 
         String path = "input.txt";

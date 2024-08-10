@@ -10,6 +10,9 @@ import java.io.IOException;
  */
 
 public class Day1 {
+    // O(n)
+    // Memory O(1)
+    // because the list will always have len 3
     public static void main(String args[]){
 
         String path = "input.txt";
