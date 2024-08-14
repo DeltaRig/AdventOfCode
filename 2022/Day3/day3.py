@@ -1,7 +1,7 @@
 
 # Daniela Pereira Rigoli
 # August 11th 2024
-# https://adventofcode.com/2022/day/3#part2
+# https://adventofcode.com/2022/day/3
 
 # O(n^2)
 # O(max line/2)
