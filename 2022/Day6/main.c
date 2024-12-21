@@ -2,34 +2,35 @@
 #include <string.h>
 #include <stdbool.h>
 
-
-// return true if the input[endMarker] is in the interval from startMarker and endMarker-1
-// else false
-// O(markerSize)
-int find(const char *window, int start, int end){
-    for(int i = 0; i < end-1; i++){
-        if(window[i] == window[j]){
+// Returns the index of a duplicate in the window, or -1 if don't find
+int finder(const char *window, int start, int end) {
+    for (int i = start; i < end; i++) {
+        if (window[i] == window[end]) {
             return i;
         }
     }
     return -1;
 }
 
-// day 6 solution O(n*markerSize)
 int findMarker(const char *input, int markerSize) {
     int dataLength = strlen(input);
     int startMarker = 0;
     int endMarker = 0;
-    while(endMarker - startMarker > markerSize){
-        // check if the input[endMarker] is in the interval from startMarker and endMarker-1
-        int find = find(&input[startMarker], startMarker, endMarker)
-        if(find(&input[startMarker], startMarker, endMarker)){
-            startMarker = find+1 + startMarker;
+    int find = -1;
+
+    while (endMarker < dataLength) {
+        // Check if the current character creates a duplicate in the window
+        find = finder(input, startMarker, endMarker);
+        if (find >= 0) {
+            // Adjust the startMarker to skip past the duplicate
+            startMarker = find + 1;
         }
         endMarker++;
+        if ((endMarker - startMarker) == markerSize) {
+            return endMarker;
+        }
     }
-    
-    return endMarker;
+    return -1;
 }
 
 int main() {
