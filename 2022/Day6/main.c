@@ -3,6 +3,7 @@
 #include <stdbool.h>
 
 // Returns the index of a duplicate in the window, or -1 if don't find
+// O(marker size)
 int finder(const char *window, int start, int end) {
     for (int i = start; i < end; i++) {
         if (window[i] == window[end]) {
@@ -12,6 +13,7 @@ int finder(const char *window, int start, int end) {
     return -1;
 }
 
+// O(n* markerSize)
 int findMarker(const char *input, int markerSize) {
     int dataLength = strlen(input);
     int startMarker = 0;
