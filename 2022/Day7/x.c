@@ -67,6 +67,39 @@ int TreeSizes( TreeNode * p ) {
   return p->size + TreeSizes( p->brod );
 }
 
+// method created by Daniela Rigoli to solve Part 1 Day 7 2022
+int SumAtMost(TreeNode *p, int atMost) {
+  if (p == NULL) return 0;
+
+  int sum = 0;
+  if (p->sub != NULL && p->size <= atMost) {
+    sum += p->size;
+  }
+  sum += SumAtMost(p->sub, atMost);
+  sum += SumAtMost(p->brod, atMost);
+
+  return sum;
+}
+
+// method created by Daniela Rigoli to solve Part 2 from Day 7 2022
+int SmallesToDelete(TreeNode *p, int best, int used, int needed) {
+  int diskSpace =70000000; 
+  if (p == NULL) return best;
+
+  int sum = 0;
+  if (p->sub != NULL && p->size < best && diskSpace - (used - p->size) > needed) {
+   // printf("Name: %s %d becasue best %d and will used %d and is free %d \n", p->name, p->size, best, (used - p->size),(diskSpace - (used - p->size)));
+    best = p->size;
+  }
+  int sub = SmallesToDelete(p->sub, best, used, needed);
+  int brod = SmallesToDelete(p->brod, best, used, needed);
+
+ // printf("sub %d  brod %d\n",sub, brod );
+  best = best < sub ? best : sub;
+  return best < brod ? best: brod;
+}
+
+
 int main ( ) {
   FILE *file = fopen("input.txt", "r");
   if (file == NULL) {
@@ -78,8 +111,15 @@ int main ( ) {
   fclose(file);
 
   int size = TreeSizes(root);
-  printf("Total size: %d\n", size);
+  printf("Total size: %d\n\n", size);
+  root = TreeSort( root );
   TreePrint(root, 0);
   
+  int p1 = SumAtMost(root, 100000);
+  printf("Part 1: %d\n\n", p1);
+
+  int p2 = SmallesToDelete(root, size, size, 30000000);
+  printf("Part 2: %d\n\n", p2);
   return 0;
 }
+
