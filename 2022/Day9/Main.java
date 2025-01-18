@@ -26,21 +26,16 @@ class Main {
             while (sc.hasNextLine()) {
                 String line = sc.nextLine();
                 System.out.println(line);
-                // H and T stat at the same position, overlapping
+                // H and T start at the same position, overlapping
                 String[] instruction = line.split(" ");
 
                 for (int i = 0; i < Integer.parseInt(instruction[1]); i++) {
                     move_head(head, instruction[0]);
-                    // System.out.println("head: " + head.toString());
                     move_tail(tail, head); // Adjust tail to stay close to head
                     System.out.println("tail: " + tail.toString());
-
-                    if (notInPoints(tail, visited)) {
-                        System.out.println("added " + tail.x + " , " + tail.y);
-                        visited.add(tail.copy());
-                    }
+                    addUnique(tail, visited);
+                    // printBoard(head, tail, visited); // Print the board after each move
                 }
-
             }
             sc.close();
         } catch (FileNotFoundException e) {
@@ -49,13 +44,6 @@ class Main {
         }
 
         System.out.println("Tail visited " + visited.size() + " different points");
-    }
-
-    public boolean isEqual(Point a, Point b) {
-        if (a.x == b.x)
-            if (a.y == b.y)
-                return true;
-        return false;
     }
 
     public static void move_head(Point h, String direction) {
@@ -73,20 +61,53 @@ class Main {
             if (dx != 0)
                 t.x += (dx > 0) ? 1 : -1;
             if (dy != 0)
-                t.y = (dy > 0) ? 1 : -1;
+                t.y += (dy > 0) ? 1 : -1;
         }
     }
 
-    public static boolean notInPoints(Point t, List<Point> list) {
+    public static boolean isEqual(Point a, Point b) {
+        return a.x == b.x && a.y == b.y;
+    }
+
+    public static void addUnique(Point t, List<Point> list) {
         for (Point p : list) {
-            if (p.x == t.x)
-                if (p.y == t.y)
-                    return false;
-
+            if (isEqual(t, p)) {
+                return;
+            }
         }
-        return true;
+        list.add(t.copy());
     }
 
+    public static void printBoard(Point head, Point tail, List<Point> visited) {
+        int size = 10; // Set the size of the board
+        char[][] board = new char[size][size];
+
+        // Initialize the board with dots
+        for (int i = 0; i < size; i++) {
+            Arrays.fill(board[i], '.');
+        }
+
+        // Mark visited points
+        for (Point p : visited) {
+            if (p.x >= 0 && p.x < size && p.y >= 0 && p.y < size) {
+                board[size - 1 - p.y][p.x] = '#';
+            }
+        }
+
+        // Mark head and tail positions
+        if (head.x >= 0 && head.x < size && head.y >= 0 && head.y < size) {
+            board[size - 1 - head.y][head.x] = 'H';
+        }
+        if (tail.x >= 0 && tail.x < size && tail.y >= 0 && tail.y < size) {
+            board[size - 1 - tail.y][tail.x] = 'T';
+        }
+
+        // Print the board
+        for (char[] row : board) {
+            System.out.println(new String(row));
+        }
+        System.out.println();
+    }
 }
 
 class Point {
@@ -103,6 +124,6 @@ class Point {
     }
 
     public Point copy() {
-        return new Point(y, x);
+        return new Point(x, y);
     }
 }
