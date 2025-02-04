@@ -47,6 +47,7 @@ class Main {
     }
 
     public static void move_head(Point h, String direction) {
+        // don't available in Java 11
         Map<String, Point> directions = Map.of("U", new Point(0, 1), "D", new Point(0, -1), "L", new Point(-1, 0), "R",
                 new Point(1, 0));
 
