@@ -1,9 +1,4 @@
-from pathlib import Path
-
-
-file = 'input.txt'
-lines = Path(file).read_text().splitlines()
-
+PSEDODOCE
 # Initialize head and tail positions
 head = (0, 0)
 tail = (0, 0)
@@ -16,4 +11,4 @@ for instruction in lines:
         move_tail()  # Adjust tail to stay close to head
         visited_positions.add(tail_position)
 
-print(len(visited_positions))
+len(visited_positions)
