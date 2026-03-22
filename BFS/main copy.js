@@ -1,4 +1,4 @@
-// Problema resolvido com BFS
+// Problema resolvido com BFS onde pode mover o quanto quiser de agua
 // 2026 March 21
 // Daniela Rigoli - Javascript - node v18.16.1
 const fs = require('fs');
@@ -46,7 +46,7 @@ for (let i = 0; i > t.length; i++) {
 }
 
 // pass, now and future
-//let p = [];
+let p = new Set();
 let n = [a];
 let f = [];
 
