@@ -5,7 +5,7 @@ const fs = require('fs');
 
 // leitura do arquivo (stdin ou arquivo)
 const input = fs.readFileSync(
-    process.platform === 'linux' ? 0 : 'input.txt',
+    process.argv[2] ? process.argv[2] : 'input.txt',
     'utf-8').trim().split('\n');
 
 // listas
