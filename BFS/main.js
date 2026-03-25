@@ -5,7 +5,7 @@ const fs = require('fs');
 
 // leitura do arquivo (stdin ou arquivo)
 const input = fs.readFileSync(
-    process.platform === 'linux' ? 0 : 'input.txt',
+    process.argv[2] ? process.argv[2] : 'input.txt',
     'utf-8').trim().split('\n');
 
 // listas
@@ -106,8 +106,7 @@ function serialize(arr) {
     return arr.join(',');
 }
 
-function goal(s){
-    // checa se chegou no objetivo
+function goal(s){ // check if achieved goal
     let ok = true;
     for (let i = 0; i < s.length; i++) {
         if (s[i] !== t[i]) {
