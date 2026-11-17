@@ -1,0 +1,16 @@
+| Caso                | Duration         | Height |
+| ------------------- | ---------------- | ------ |
+|  casos/casoa15.txt  |  0:00:00.000041  | 2      |
+|  casos/casoa18.txt  |  0:00:00.000048  | 3      |
+|  casos/casoa20.txt  |  0:00:00.000061  | 6      |
+|  casos/casoa25.txt  |  0:00:00.000077  | 8      |
+|  casos/casoa30.txt  |  0:00:00.000238  | 11     |
+|  casos/casoa40.txt  |  0:00:00.000292  | 14     |
+|  casos/casoa50.txt  |  0:00:00.000533  | 12     |
+|  casos/casob15.txt  |  0:00:00.000043  | 3      |
+|  casos/casob18.txt  |  0:00:00.000065  | 7      |
+|  casos/casob20.txt  |  0:00:00.000035  | 3      |
+|  casos/casob25.txt  |  0:00:00.000079  | 7      |
+|  casos/casob30.txt  |  0:00:00.000117  | 11     |
+|  casos/casob40.txt  |  0:00:00.001124  | 16     |
+|  casos/casob50.txt  |  0:00:00.000626  | 13     |
