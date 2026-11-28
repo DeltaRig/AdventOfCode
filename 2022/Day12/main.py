@@ -44,7 +44,7 @@ def bfs(lines, start_i, start_j):
 
 # read input.txt
 
-with open("inputMy.txt", "r") as f:
+with open("input.txt", "r") as f:
     lines = f.readlines()
 
 i, j = findStart(lines)
