@@ -4,7 +4,9 @@
 
 #define MAX_NAME_LEN 100
 #define MAX_STACK_SIZE 100
-#define INPUT_SIZE 256
+//                       12559192
+#define TOTAL_DISK_SPACE 70000000
+#define REQUIRED_UNUSED_SPACE 30000000
 
 // Stack entry for a directory
 typedef struct {
@@ -59,20 +61,26 @@ int main() {
         return 1;
     }
 
-    char line[INPUT_SIZE];
+    char line[256];
     Stack stack;
     initStack(&stack);
     push(&stack, "/"); // Start at the root directory
 
     int totalSumP1 = 0;
+    int totalUsedSpace = 0;
+
+    // Array to track directory sizes for part two
+    int directorySizes[MAX_STACK_SIZE];
+    int dirCount = 0;
 
     while (fgets(line, sizeof(line), file)) {
         line[strcspn(line, "\n")] = '\0'; // Remove newline character
 
         if (strncmp(line, "$ cd ", 5) == 0) {
             // Change directory command
+            StackEntry *parent = peek(&stack);
+
             char *dirName = line + 5;
-            //printf("dir %s\n", dirName);
             if (strcmp(dirName, "/") == 0) {
                 // Go to root: clear stack and push root
                 while (stack.top >= 0) pop(&stack);
@@ -82,14 +90,17 @@ int main() {
                 StackEntry dir = pop(&stack);
                 if (dir.size <= 100000) {
                     totalSumP1 += dir.size; // Add to total if size ≤ 100,000
-                } else {
-                    printf("Name: %s, size: %d \n", dir.name, dir.size);
-                }
-                // Add size to the parent directory (if exists)
-                StackEntry *parent = peek(&stack);
+                } 
+
                 if (parent != NULL) {
+                    // Add size to the parent directory (if exists)
                     parent->size += dir.size;
                 }
+
+                // Save the size of the directory
+                printf("Name: %s, size: %d \n", dir.name, dir.size);
+                directorySizes[dirCount++] = dir.size;
+
             } else {
                 // Go into a subdirectory: push it onto the stack
                 push(&stack, dirName);
@@ -114,13 +125,49 @@ int main() {
 
     fclose(file);
 
-    int totalDisk = 70000000;
-    int unused = 30000000;
+    // Process any remaining directories in the stack
+    while (stack.top >= 0) {
+        StackEntry dir = pop(&stack);
 
-    // Print the result
+        // Save the size of the directory
+        printf("Name: %s, size: %d \n", dir.name, dir.size);
+        directorySizes[dirCount++] = dir.size;
+
+        // Add size to the parent directory (if exists)
+        StackEntry *parent = peek(&stack);
+        if (parent != NULL) {
+            parent->size += dir.size;
+        }
+
+        // Track the total used space
+        if (stack.top < 0) {
+            totalUsedSpace = dir.size; // Root directory size
+        }
+    }
+
+    // Calculate the space needed
+    int unusedSpace = TOTAL_DISK_SPACE - totalUsedSpace;
+    int spaceToFree = REQUIRED_UNUSED_SPACE - unusedSpace;
+
+    // Find the smallest directory that can be deleted (part 2)
+    int smallestDirSize = TOTAL_DISK_SPACE;
+    for (int i = 0; i < dirCount; i++) {
+        if (directorySizes[i] >= spaceToFree && directorySizes[i] < smallestDirSize) {
+            smallestDirSize = directorySizes[i];
+        }
+    }
+
+    // Print the result part 1
     printf("Sum of total sizes of directories ≤ 100,000: %d\n", totalSumP1);
-    printf("Need at least: %d\n", (totalDisk-totalSumP1));
     
+    // Part 2
+    printf("Total used space: %d\n", totalUsedSpace);
+    printf("Total unusedSpace: %d\n", unusedSpace);
+
+    printf("Total space to free: %d\n", spaceToFree);
+
+
+    printf("Smallest directory size to delete: %d\n", smallestDirSize);
 
     return 0;
 }

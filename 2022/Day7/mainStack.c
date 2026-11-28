@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -72,7 +73,7 @@ int main() {
         if (strncmp(line, "$ cd ", 5) == 0) {
             // Change directory command
             char *dirName = line + 5;
-            printf("dor %s\n", dirName);
+            printf("dir %s\n", dirName);
             if (strcmp(dirName, "/") == 0) {
                 // Go to root: clear stack and push root
                 while (stack.top >= 0) pop(&stack);
